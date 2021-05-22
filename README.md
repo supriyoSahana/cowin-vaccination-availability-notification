@@ -5,7 +5,7 @@ Target Audience: < 45 yrs
 ```
 
 ```
-Code Philisophy: If run in background it will keep hitting cowin API every mins to check vaccine availability for a week and will send test messages [max 5 texts to avoid multiple messages] and will get reset very next day.
+Code Philisophy: If run in background it will keep hitting cowin API every 5 min to check vaccine availability for a week and will send a text notification [max 5 texts to avoid free twilio account burn out] and will get reset very next day.
 
 
 
