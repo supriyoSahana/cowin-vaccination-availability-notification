@@ -52,7 +52,7 @@ def vaccineSlotDetector(account_sid,auth_token,districtId):
                 if MessageCounter <= 0:
                     break
 
-            time.sleep(300)
+            time.sleep(60)
 
        #MessageReseter can be buggy need to think better alternative
         if MessageCounter == 0:
