@@ -15,10 +15,10 @@ def dateGenerator():
     return dateList
 
 
-def runApi(centerId):
+def runApi(districtId):
     dateList = dateGenerator()
     for apiDate in dateList:
-        API = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=" + str(centerId) + "&date=" + apiDate
+        API = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=" + str(districtId) + "&date=" + apiDate
         headers = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36"}
         req = requests.get(API, headers=headers)
         obj = req.json()
@@ -32,13 +32,13 @@ def runApi(centerId):
     return False, "Not yet", "Not yet"
 
 
-def vaccineSlotDetector(account_sid,auth_token,centerId):
+def vaccineSlotDetector(account_sid,auth_token,districtId):
     MessageCounter = 5
     alertSentDate = date.today()
     while True:
 
         while True:
-            flag, centerName, availableDate = runApi(centerId)
+            flag, centerName, availableDate = runApi(districtId)
             if flag and MessageCounter > 0:
 
 
@@ -65,12 +65,12 @@ def vaccineSlotDetector(account_sid,auth_token,centerId):
 
 if __name__ == '__main__':
 
-    centerId = ""  # Put your center Id here
+    districtId = ""  # Put your center Id here
     account_sid = " " #put your twilio account_sid
     auth_token = " " #put your twilio auth_token
 
     try:
-        vaccineSlotDetector(account_sid,auth_token,centerId)
+        vaccineSlotDetector(account_sid,auth_token,districtId)
 
     except:
         client = Client(account_sid, auth_token)
