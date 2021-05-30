@@ -27,9 +27,9 @@ def runApi(districtId):
                 if v["fee_type"] == "Free":
                     for session in v["sessions"]:
                         if session["available_capacity"] > 0 and session["min_age_limit"] == 18:
-                            return True, v["name"], session["date"]
+                            return True, v["name"], session["date"], session["available_capacity"]
 
-    return False, "Not yet", "Not yet"
+    return False, "Not yet", "Not yet", 0
 
 
 def vaccineSlotDetector(account_sid,auth_token,districtId):
@@ -38,13 +38,13 @@ def vaccineSlotDetector(account_sid,auth_token,districtId):
     while True:
 
         while True:
-            flag, centerName, availableDate = runApi(districtId)
+            flag, centerName, availableDate, availableCapacity = runApi(districtId)
             if flag and MessageCounter > 0:
 
 
                 #Need/can to implement a helper method for sending message.....
                 client = Client(account_sid, auth_token)
-                messageBody = "Hey it's your buddy Supriyo, Vaccine is available please check at" + availableDate + centerName
+                messageBody = "Hey it's your buddy supriyo, Vaccine is available please check at center" + centerName + "on" + availableDate + "slots" + str(availableCapacity)
                 message = client.messages.create(body=messageBody, from_='Put your twilio phone no.', to='put your twilio authorised phone no.')
                 MessageCounter = MessageCounter - 1
                 alertSentDate = date.today()
