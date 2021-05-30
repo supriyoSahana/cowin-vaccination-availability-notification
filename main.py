@@ -65,7 +65,7 @@ def vaccineSlotDetector(account_sid,auth_token,districtId):
 
 if __name__ == '__main__':
 
-    districtId = ""  # Put your center Id here
+    districtId = ""  # Put your districtId here
     account_sid = " " #put your twilio account_sid
     auth_token = " " #put your twilio auth_token
 
